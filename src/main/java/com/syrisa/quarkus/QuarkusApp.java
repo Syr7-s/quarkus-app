@@ -1,27 +1,23 @@
 package com.syrisa.quarkus;
 
-import com.syrisa.quarkus.util.FizzBuzzExecutor;
-import com.syrisa.quarkus.util.GreetingUtil;
+import com.syrisa.quarkus.data.repository.ServiceRepository;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
+import lombok.RequiredArgsConstructor;
+
+import javax.enterprise.context.control.ActivateRequestContext;
 
 @QuarkusMain
+@RequiredArgsConstructor
 public class QuarkusApp implements QuarkusApplication {
 
-
-    GreetingUtil greetingUtil;
-    FizzBuzzExecutor fizzBuzzExecutor;
-
-    public QuarkusApp(GreetingUtil greetingUtil,FizzBuzzExecutor fizzBuzzExecutor){
-        super();
-        this.greetingUtil = greetingUtil;
-        this.fizzBuzzExecutor = fizzBuzzExecutor;
-    }
+    private final ServiceRepository serviceRepository;
 
     @Override
+    @ActivateRequestContext
     public int run(String... args) throws Exception {
-        System.out.println(this.greetingUtil.getGreetingName());
-        fizzBuzzExecutor.execute();
+        serviceRepository.getAllServices().forEach(System.out::println);
         return 0;
     }
+
 }
