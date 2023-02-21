@@ -3,7 +3,7 @@ package com.syrisa.quarkus.util;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.sql.SQLOutput;
+
 
 @ApplicationScoped
 public class FizzBuzzExecutor {
@@ -12,8 +12,10 @@ public class FizzBuzzExecutor {
 
     @ConfigProperty(name = "fb.five",defaultValue = "Buzz")
     String fiveMultipleText;
+
     @ConfigProperty(name = "fb.both",defaultValue = "FizzBuzz")
     String bothMultipleText;
+
     @ConfigProperty(name = "fb.max",defaultValue = "100")
     int maxNumber;
 
