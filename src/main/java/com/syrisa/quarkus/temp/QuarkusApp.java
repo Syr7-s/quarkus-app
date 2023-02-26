@@ -1,4 +1,4 @@
-package com.syrisa.quarkus;
+package com.syrisa.quarkus.temp;
 
 import com.syrisa.quarkus.data.entity.Service;
 import com.syrisa.quarkus.data.repository.CustomerRepository;
@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 import javax.enterprise.context.control.ActivateRequestContext;
 
-@QuarkusMain
+//@QuarkusMain
 @RequiredArgsConstructor
 public class QuarkusApp implements QuarkusApplication {
 
