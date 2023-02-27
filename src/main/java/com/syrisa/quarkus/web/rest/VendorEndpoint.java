@@ -11,6 +11,7 @@ import org.jboss.resteasy.reactive.RestQuery;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/rest/vendors")
@@ -45,8 +46,28 @@ public class VendorEndpoint {
     }
 
     @GET
+    public List<Vendor> getVendors(@QueryParam("email") String email,@QueryParam("name") String name){
+        if (StringUtil.isNullOrEmpty(email) && StringUtil.isNullOrEmpty(name)){
+            return this.vendorRepository.listAll();
+        }else{
+            List<Vendor> vendors = new ArrayList<>();
+            if (StringUtil.isNullOrEmpty(email) && !StringUtil.isNullOrEmpty(name)){
+               Vendor vendor = this.vendorRepository.findByEmailAndName(email, name);
+               vendors.add(vendor);
+            }else if(!StringUtil.isNullOrEmpty(email)){
+                Vendor vendor = this.vendorRepository.findByEmailAndName(email, name);
+                vendors.add(vendor);
+            }else{
+                Vendor vendor = this.vendorRepository.findByEmailAndName(email, name);
+                vendors.add(vendor);
+            }
+            return vendors;
+        }
+    }
+
+    @GET
     @Path("/all")
-    public List<Vendor> getServices(){
+    public List<Vendor> getAllVendors(){
         return this.vendorRepository.listAll();
     }
 
