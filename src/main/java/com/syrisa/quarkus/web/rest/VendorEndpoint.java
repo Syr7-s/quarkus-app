@@ -33,7 +33,8 @@ public class VendorEndpoint {
         return vendor;
     }
 
-    @GET
+    @GET()
+    @Path("/name")
     public Vendor getByName(@RestQuery("name") String name){
         if (StringUtil.isNullOrEmpty(name)){
             throw new BadRequestException();
@@ -46,6 +47,7 @@ public class VendorEndpoint {
     }
 
     @GET
+    @Path("/emailOrName")
     public List<Vendor> getVendors(@QueryParam("email") String email,@QueryParam("name") String name){
         if (StringUtil.isNullOrEmpty(email) && StringUtil.isNullOrEmpty(name)){
             return this.vendorRepository.listAll();
